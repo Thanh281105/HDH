@@ -1,28 +1,25 @@
-# Thread-Safe Shared Memory Library
+# Thư viện Bộ nhớ chia sẻ An toàn Đa luồng (Thread-Safe Shared Memory Library)
 
-Thu vien mau minh hoa cach dong goi System V shared memory va System V semaphore
-thanh mot dynamic library `.so`. API cua thu vien tu dong khoa semaphore bang
-thao tac P truoc khi truy cap shared memory va mo khoa bang thao tac V sau khi
-hoan tat.
+Thư viện mẫu minh họa cách đóng gói bộ nhớ chia sẻ System V (System V Shared Memory) và System V Semaphore thành một thư viện động (`.so`). API của thư viện tự động khóa semaphore bằng thao tác P trước khi truy cập bộ nhớ chia sẻ và mở khóa bằng thao tác V sau khi hoàn tất.
 
-## Cau truc
+## Cấu trúc thư mục
 
 ```text
-include/safe_shm.h     Public API
-src/safe_shm.c         Cai dat thu vien .so
-demo/main.c            Demo 100 luong tang chung mot o nho
-report/report.tex      Bao cao LaTeX
-Makefile               Build, run, install, clean
+include/safe_shm.h     API công khai (Public API)
+src/safe_shm.c         Cài đặt thư viện .so
+demo/main.c            Chương trình demo 100 luồng cùng tăng giá trị trên một ô nhớ chia sẻ
+report/report.tex      Báo cáo LaTeX (đã được bỏ qua khi đẩy lên Git)
+Makefile               Dùng để Build, run, install, clean
 ```
 
-## Build va chay demo
+## Biên dịch và Chạy Demo
 
 ```bash
 make
 make run
 ```
 
-Ket qua dung:
+Kết quả mong đợi:
 
 ```text
 Threads:             100
@@ -32,27 +29,27 @@ Actual final value:  100000
 Result: PASS - shared memory updates are synchronized.
 ```
 
-## Cai dat thu vien
+## Cài đặt thư viện
 
-Lenh sau cai `libsafe_shm.so` vao `/lib` va header vao `/usr/local/include`.
-Tren Linux that, thuong can quyen `sudo`.
+Lệnh sau cài đặt thư viện `libsafe_shm.so` vào `/lib` và tệp tiêu đề (header) vào `/usr/local/include`.
+Trên hệ điều hành Linux thực tế, bạn thường cần quyền quản trị `sudo`.
 
 ```bash
 sudo make install
 ```
 
-Co the dung `DESTDIR` de dong goi thu nghiem ma khong ghi vao he thong:
+Có thể sử dụng tham số `DESTDIR` để kiểm tra đóng gói thử nghiệm mà không cần ghi đè vào hệ thống:
 
 ```bash
 make install DESTDIR=/tmp/safe-shm-package
 ```
 
-## Build bao cao
+## Biên dịch báo cáo
 
-Neu may da co XeLaTeX:
+Nếu máy tính của bạn đã cài đặt XeLaTeX:
 
 ```bash
 make report
 ```
 
-File PDF se nam tai `build/report/report.pdf`.
+Tệp PDF kết quả sẽ nằm tại thư mục `build/report/report.pdf`.
